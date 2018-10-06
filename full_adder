@@ -1,0 +1,33 @@
+module half_adder(in1,in2,s,car);
+
+input in1, in2;
+output s, car;
+
+assign s = in1 ^ in2 ;
+assign car = in1 & in2 ;
+
+endmodule
+
+module full_adder(a,b,c,sum,carry);
+
+input a,b,c;
+output sum,carry;
+
+wire sum1, carry1, carry2;
+
+    half_adder inst1 (
+            .in1(a),
+            .in2(b),
+            .s(sum1),
+            .car(carry1)
+            );
+    half_adder inst2 (
+            .in1(c),
+            .in2(sum1),
+            .s(sum),
+            .car(carry2)
+            );
+
+assign carry = carry1 | carry2 ;
+
+endmodule
